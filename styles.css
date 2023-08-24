@@ -1,0 +1,50 @@
+/* En tu archivo CSS */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+
+body {
+  font-family: 'Lobster', cursive;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-repeat: repeat-x; /* Repetir solo horizontalmente */
+  background-size: auto 100%; /* Ajustar el ancho de las imágenes al 100% de la altura */
+  transition: background-image 1s ease;
+}
+
+.container {
+  text-align: center;
+  max-width: 700px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.countdown div {
+  margin: 0 10px;
+}
+
+@media (max-width: 600px) {
+  .countdown {
+    flex-direction: column;
+  }
+
+  .countdown div {
+    margin: 5px 0;
+  }
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
