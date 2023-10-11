@@ -1,8 +1,6 @@
 // Fecha de referencia: 21 de Abril del 2021 a las 11:48 AM
 const targetDate = new Date('2021-04-21T11:48:00');
 
-//
-
 // Para agregar una imagen nueva, coloca la imagen en la carpeta "img", luego agrega el path de la imagen en el arreglo de "image"
 const images = [
     './img/20221216_155104.jpg',
