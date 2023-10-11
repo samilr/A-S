@@ -5,7 +5,8 @@ const images = [
     './img/20221216_172544.jpg',
     './img/WhatsApp Image 2023-08-24 at 16.11.21.jpg',
     './img/IMG_20220502_184031_312.jpg',
-    './img/20221216_172538.jpg'
+    './img/20221216_172538.jpg',
+    './img/IMG-20231008-WA0029.jpg',
 ];
 
 let currentImageIndex = 0;
