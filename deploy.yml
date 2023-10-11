@@ -17,7 +17,10 @@ jobs:
         with:
           branch: gh-pages
 
-      - name: Reload Page
-        uses: JasonEtco/reload@v1
+      - name: Wait for deployment to finish
+        run: sleep 30 # Espera 30 segundos (ajusta según tu necesidad)
+
+      - name: Trigger page reload
+        uses: softprops/action-gh-pages@v3
         with:
-          branch: gh-pages
+          personal_token: ${{ secrets.GITHUB_TOKEN }}
