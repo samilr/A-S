@@ -20,4 +20,4 @@ jobs:
       - name: Reload Page
         uses: JasonEtco/reload@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
