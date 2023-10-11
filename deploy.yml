@@ -18,7 +18,12 @@ jobs:
           branch: gh-pages
 
       - name: Wait for deployment to finish
-        run: sleep 30 # Espera 30 segundos (ajusta según tu necesidad)
+        run: |
+          # Espera hasta que la URL de despliegue esté disponible
+          while [ "$(curl -s -o /dev/null -w ''%{http_code}'' https://samilr.github.io/A-S/)" != "200" ]; do
+            echo "Esperando a que la página se actualice..."
+            sleep 5
+          done
 
       - name: Trigger page reload
         uses: softprops/action-gh-pages@v3
