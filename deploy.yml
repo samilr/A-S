@@ -16,3 +16,8 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           branch: gh-pages
+
+      - name: Reload Page
+        uses: JasonEtco/reload@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
