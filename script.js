@@ -13,6 +13,7 @@ const images = [
 
 let currentImageIndex = 0;
 
+// Función para cambiar el fondo de pantalla
 function changeBackgroundImage() {
     document.body.style.backgroundImage = `url('${preloadedImages[currentImageIndex].src}')`;
     currentImageIndex = (currentImageIndex + 1) % preloadedImages.length;
