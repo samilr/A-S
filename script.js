@@ -29,8 +29,6 @@ const preloadedImages = images.map(imageSrc => {
 // Mostrar la primera imagen inmediatamente
 changeBackgroundImage();
 
-//a
-
 // Cambiar la imagen cada 5 segundos
 setInterval(changeBackgroundImage, 5000);
 
