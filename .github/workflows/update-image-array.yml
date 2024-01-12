@@ -1,0 +1,43 @@
+name: Update Image Array
+
+on:
+  push:
+    paths:
+      - 'img/*.{png,jpg,jpeg,gif}'
+
+jobs:
+  update-array:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Update Array
+      run: |
+        # Obtener la lista de imágenes en la carpeta img
+        images=$(find img -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" \))
+
+        # Construir la parte del array que se añadirá al archivo JavaScript
+        array_part=""
+        for image in $images; do
+          array_part+="    './$image',"$'\n'
+        done
+
+        # Actualizar el archivo JavaScript solo si hay nuevas imágenes
+        if [ -n "$array_part" ]; then
+          # Eliminar la última coma en el array si hay nuevas imágenes
+          array_part="${array_part%,*}"
+
+          # Insertar el array_part en el archivo JavaScript antes de la constante existente
+          sed -i "/const images = \[/ { s/.*/&\n$array_part/; }" archivo.js
+
+          # Commit y push los cambios
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add archivo.js
+          git commit -m "Actualizar array con nuevas imágenes [skip ci]"
+          git push
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
