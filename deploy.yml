@@ -1,31 +1,47 @@
-name: Deploy to GitHub Pages
+name: Update Image Array and Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - gh-pages
+      - gh-pages #branch: Asegúrate de ajustar esto a tu rama principal
 
 jobs:
-  deploy:
+  update-array-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Deploy
+      - name: Update Image Array
+        run: |
+          # Obtener la lista de imágenes en la carpeta img
+          images=$(find img -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" \))
+
+          # Construir la parte del array que se añadirá al archivo JavaScript
+          array_part=""
+          for image in $images; do
+            array_part+="    './$image',"$'\n'
+          done
+
+          # Actualizar el archivo JavaScript solo si hay nuevas imágenes
+          if [ -n "$array_part" ]; then
+            # Eliminar la última coma en el array si hay nuevas imágenes
+            array_part="${array_part%,*}"
+
+            # Insertar el array_part en el archivo JavaScript antes de la constante existente
+            sed -i "/const images = \[/ { s/.*/&\n$array_part/; }" archivo.js
+
+            # Commit y push los cambios
+            git config --global user.email "actions@github.com"
+            git config --global user.name "GitHub Actions"
+            git add archivo.js
+            git commit -m "Actualizar array con nuevas imágenes [skip ci]"
+            git push
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           branch: gh-pages
-
-      - name: Wait for deployment to finish
-        run: |
-          # Espera hasta que la URL de despliegue esté disponible
-          while [ "$(curl -s -o /dev/null -w ''%{http_code}'' https://samilr.github.io/A-S/)" != "200" ]; do
-            echo "Esperando a que la página se actualice..."
-            sleep 5
-          done
-
-      - name: Trigger page reload
-        uses: softprops/action-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
