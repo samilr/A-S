@@ -14,7 +14,8 @@ const images = [
     './img/20231028_215802.jpg',
     './img/20231205_224532.jpg',
     './img/PXL_20231217_012858849.jpg',
-    './img/20220429_032129.jpg'
+    './img/20220429_032129.jpg',
+    './img/PXL_20231217_013354042.jpg'
 ];
 
 let currentImageIndex = 0;
