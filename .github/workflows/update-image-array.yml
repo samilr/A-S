@@ -2,6 +2,8 @@ name: Update Image Array
 
 on:
   push:
+    branches:
+      - gh-pages
     paths:
       - 'img/*.{png,jpg,jpeg,gif}'
 
