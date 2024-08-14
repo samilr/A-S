@@ -1,5 +1,6 @@
 // Fecha de referencia: 21 de Abril del 2021 a las 11:48 AM
-const targetDate = new Date('2021-04-21T11:48:00');
+//const targetDate = new Date('2021-04-21T11:48:00');
+const targetDate = new Date('2024-02-25T11:48:00');
 
 // Para agregar una imagen nueva, coloca la imagen en la carpeta "img", luego agrega el path de la imagen en el arreglo de "image"
 const images = [
@@ -19,9 +20,11 @@ const images = [
 
 let currentImageIndex = 0;
 
+
 // Función para cambiar el fondo de pantalla
 function changeBackgroundImage() {
-    document.body.style.backgroundImage = `url('${preloadedImages[currentImageIndex].src}')`;
+    const backgroundContainer = document.querySelector('.background-container');
+    backgroundContainer.style.backgroundImage = `url('${preloadedImages[currentImageIndex].src}')`;
     currentImageIndex = (currentImageIndex + 1) % preloadedImages.length;
 }
 
@@ -61,3 +64,12 @@ function updateCountdown() {
 // Actualizar el contador cada segundo
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+const divStart = document.getElementById('startApp');
+const audioDefault = document.getElementById("background-audio");
+
+divStart.addEventListener('click', () => {
+    audioDefault.play();
+    divStart.style.display = 'none';
+});
+
